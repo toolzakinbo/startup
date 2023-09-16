@@ -1,1 +1,2 @@
-
+- I learned how to create a repository on github.
+- I learned how to push my changes to my github repository and also how to clone my repository. 
