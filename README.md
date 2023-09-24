@@ -7,7 +7,7 @@ Elevate your culinary journey with our Recipe Review App! Imagine a world where 
 ## Deliverable Specification
 ### Design
 ![DES](IMG0016.jpg)
-![DEST](IMG0018.png)
+![DEST](IMG0118.PNG)
 ### Key Features
 - Users can create accounts securely and login over HTTPS to protect user data
 - Ability to search and filter recipes by various criteria
