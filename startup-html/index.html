@@ -29,10 +29,10 @@
     <div id="loginTab" class="tab-content">
         <form action="login.php" method="post" onsubmit="return login()">
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br>
+            <input type="text" id="username" name="username" required placeholder="joem"><br>
 
             <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br>
+            <input type="password" id="password" name="password" required placeholder="gjkgri6"><br>
 
             <button type="submit">Login</button>
         </form>
@@ -42,16 +42,19 @@
     <div id="createAccountTab" class="tab-content" style="display:none;">
         <form action="create-account.php" method="post">
             <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required><br>
+            <input type="text" id="name" name="name" placeholder="Joe Malone" required><br>
+
+            <label for="name">Username:</label><br>
+            <input type="text" id="new-username" name="new-username" placeholder="joem" required><br>
 
             <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
+            <input type="email" id="email" name="email" placeholder="joemalone@fake.com" required><br>
 
             <label for="new-password">Password:</label><br>
-            <input type="password" id="new-password" name="new-password" required><br>
+            <input type="password" id="new-password" name="new-password" required placeholder="ssjkf34"><br>
 
             <label for="confirm-password">Re-enter Password:</label><br>
-            <input type="password" id="confirm-password" name="confirm-password" required><br>
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder="ssjkf34"><br>
 
             <button type="submit">Create Account</button>
         </form>
