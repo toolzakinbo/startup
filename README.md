@@ -19,19 +19,19 @@ Elevate your culinary journey with our Recipe Review App! Imagine a world where 
 I am going to be using HTML, CSS, JavaScript, Web Services, WebSocket, React, a DataBase(MongoDB), and React. 
 #### HTML
 This is going to be used for structure.
-- A couple of HTML pages would be used. One would be used for login purposes and for users to create new accounts; a page where users can browse and review recipes; a recipe details page; a recipe upload page, and a user profile page.
-- It is responsible for the textual description of each recipe using text
+- A couple of HTML pages would be used. One would be used for login purposes and for users to create new accounts; a page where users can browse and review recipes; a recipe details page; a recipe upload page, and a user profile page. DONE
+- It is responsible for the textual description of each recipe using text.DONE
 - displaying images for each recipe
-- input boxes for the login page and a submit button to initiate login
-- fetches recipes and their details from the database
+- input boxes for the login page and a submit button to initiate login. DONE
+- fetches recipes and their details from the database. DONE
 #### CSS
 This is going to be used for styling and animation. 
 - navigation, header, text content, login page, recipe review page, and responsive styles would be done using CSS.
 #### JavaScript
 This deliverable is responsible for interactivity.
-- It handles user authentication when the Login button is clicked
-- It handles recipe uploads when the upload button is clicked
-- Uses Websockets to notify users when their recipe receives a comment and update the recipe listing in real time to reflect new uploads.
+- It handles user authentication when the Login button is clicked. DONE
+- It handles recipe uploads when the upload button is clicked. DONE
+- Uses Websockets to notify users when their recipe receives a comment and update the recipe listing in real time to reflect new uploads.DONE
 #### Web Services
 This deliverable is responsible for endpoints for retrieving recipe details, ratings, and reviews.
 - Recipe data handling
@@ -42,9 +42,9 @@ This deliverable is responsible for storing the data for each recipe.
 - MongoDB is the database used and it stores all the recipe data here.
 #### Login
 This deliverable associates recipes with a specific user
-- It is responsible for user registration
+- It is responsible for user registration. DONE
 - MongoDB is used to store the users and their recipes
-- Associate existing users with their recipes
+- Associate existing users with their recipes. DONE
 #### WebSocket 
 This deliverable is responsible for real-time updates on the frontend
 - Enables instant data exchange between the server and the client which allows users to see updates without refreshing the page.
