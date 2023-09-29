@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Create Account</title>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+          <li><a href="recreview.html">Recipe Reviews</a></li>
+          <li><a href="recupload.html">Upload Recipe</a></li>
+          <li><a href="userprofile.html">User Profile</a></li>
+      </ul>
+  </nav>
+</head>
+
+<body>
+
+    <h1>Login / Create Account</h1>
+
+    <div id="tabs">
+        <button onclick="openTab('loginTab')">Login</button>
+        <button onclick="openTab('createAccountTab')">Create Account</button><br><br>
+    </div>
+    
+    <!-- Login Tab -->
+    <div id="loginTab" class="tab-content">
+        <form action="login.php" method="post" onsubmit="return login()">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Create Account Tab -->
+    <div id="createAccountTab" class="tab-content" style="display:none;">
+        <form action="create-account.php" method="post">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="new-password">Password:</label><br>
+            <input type="password" id="new-password" name="new-password" required><br>
+
+            <label for="confirm-password">Re-enter Password:</label><br>
+            <input type="password" id="confirm-password" name="confirm-password" required><br>
+
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+
+    <!-- Placeholder for websocket data showing real time communication-->
+
+    <!-- <script>
+        function openTab(tabName) {
+            var i, tabContent;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+
+        function login() {
+            // Assuming the server-side login validation is successful, redirect to the recipe review page.
+            window.location.href = "recipe-review.html";
+            // Return false to prevent the form from submitting.
+            return false;
+        }
+    </script> -->
+
+</body>
+<br>
+<br>
+<footer>
+  <a href="https://github.com/toolzakinbo/startup/tree/main">GitHub</a>
+</footer>
+
+</html>
