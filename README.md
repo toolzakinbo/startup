@@ -25,7 +25,7 @@ This is going to be used for structure.
 - input boxes for the login page and a submit button to initiate login. DONE
 - fetches recipes and their details from the database. DONE
 #### CSS
-This is going to be used for styling and animation. 
+This is going to be used for styling and animation. DONE
 - navigation, header, text content, login page, recipe review page, and responsive styles would be done using CSS.
 #### JavaScript
 This deliverable is responsible for interactivity.
