@@ -21,12 +21,12 @@ I am going to be using HTML, CSS, JavaScript, Web Services, WebSocket, React, a 
 This is going to be used for structure.
 - A couple of HTML pages would be used. One would be used for login purposes and for users to create new accounts; a page where users can browse and review recipes; a recipe details page; a recipe upload page, and a user profile page. DONE
 - It is responsible for the textual description of each recipe using text.DONE
-- displaying images for each recipe
+- displaying images for each recipe (Not sure what is going on with this. Sometimes it shows the pictures, sometimes they don't)
 - input boxes for the login page and a submit button to initiate login. DONE
 - fetches recipes and their details from the database. DONE
 #### CSS
 This is going to be used for styling and animation. DONE
-- navigation, header, text content, login page, recipe review page, and responsive styles would be done using CSS.
+- navigation, header, text content, login page, recipe review page, and responsive styles would be done using CSS. DONE
 #### JavaScript
 This deliverable is responsible for interactivity.
 - It handles user authentication when the Login button is clicked. DONE
