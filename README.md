@@ -31,7 +31,7 @@ This is going to be used for styling and animation. DONE
 This deliverable is responsible for interactivity.
 - It handles user authentication when the Login button is clicked. DONE
 - It handles recipe uploads when the upload button is clicked. DONE
-- Uses Websockets to notify users when their recipe receives a comment and update the recipe listing in real time to reflect new uploads.DONE
+- Uses Websockets to notify users when their recipe receives a comment and update the recipe listing in real time to reflect new uploads.DONE-ISH I have the placeholder for it and nothing else right now
 #### Web Services
 This deliverable is responsible for endpoints for retrieving recipe details, ratings, and reviews.
 - Recipe data handling
