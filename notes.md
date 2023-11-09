@@ -35,3 +35,11 @@
   -    Javascript executes as a single threaded application. This means that there is only ever one piece of code executed at the same time. However, the fact that it does not execute concurrently does not mean that it does not execute in parallel.
   -    You can asynchronously execute code with the use of a promise. Because the execution is asynchronous, the promise object can be in one of three states at any given point in time.
   -    You have pending, fulfilled, and rejected. 
+
+HTTP:
+- When a web client (e.g. a web browser) and a web server talk they exchange HTTP requests and responses. The browser will make an HTTP request and the server will generate an HTTP response.
+- Get the requested resource. This can represent a request to get a single resource or a resource representing a list of resources.
+- POST: Create a new resource. The body of the request contains the resource. The response should include a unique ID of the newly created resource.
+- PUT: Update a resource. Either the URL path, HTTP header, or body must contain the unique ID of the resource being updated. The body of the request should contain the updated resource. The body of the response may contain the resulting updated resource.
+- Delete a resource. Either the URL path or HTTP header must contain the unique ID of the resource to delete.
+- Get metadata about a resource. Usually only HTTP headers are returned. The resource itself is not returned.
