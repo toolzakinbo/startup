@@ -34,9 +34,9 @@ This deliverable is responsible for interactivity.
 - Uses Websockets to notify users when their recipe receives a comment and update the recipe listing in real time to reflect new uploads.DONE-ISH I have the placeholder for it and nothing else right now
 #### Web Services
 This deliverable is responsible for endpoints for retrieving recipe details, ratings, and reviews.
-- Recipe data handling
-- API endpoints for authentication
-- RESTFul API endpoints that serve as the interface between the front-end and backend of the app
+- Recipe data handling DONE
+- API endpoints for authentication DONE
+- RESTFul API endpoints that serve as the interface between the front-end and backend of the app DONE
 #### Database
 This deliverable is responsible for storing the data for each recipe. 
 - MongoDB is the database used and it stores all the recipe data here.
