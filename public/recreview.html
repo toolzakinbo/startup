@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Review Site</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+            <li><a href="recreview.html">Recipe Reviews</a></li>
+            <li><a href="recupload.html">Upload Recipe</a></li>
+            <li><a href="userprofile.html">User Profile</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Welcome Sadie!</h2>
+            <p>Explore and share your favorite recipes with our community.</p>
+        </section>
+
+        <div id="recipeList"></div>
+    
+        <div id = "jokeContainer"></div>
+    
+<!-- Placeholder for 3rd party service call-->
+        <section id="third-party-data">
+            <h2>Third-Party Service Data</h2>
+            <p id="third-party-content">Fetching data from the third-party service...</p>
+        </section>
+    </main>
+
+    <script>
+        // Call displayJoke when the page loads
+        document.addEventListener("DOMContentLoaded", () => {
+          displayJoke();
+        });
+      </script>
+      
+    <footer>
+        <a href="https://github.com/toolzakinbo/startup/tree/main">Github</a>
+    </footer>
+
+</body>
+
+</html>
