@@ -62,4 +62,10 @@
 
 -Authorization Services:
 - authenticate a user by asking for information such as an email address and password.
-- 
+- need authentication to be less complex but still very much secure
+
+-Account Creation:
+- create an authentication endpoint to get the cookie containing the authentication token and user ID.
+- Also create a login auth endpoint that would return a cookie containing the auth token and userID.
+- GetMe endpoint uses the auth token stored in the cookie to look up and return info about authenticated user.
+  
