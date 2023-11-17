@@ -53,6 +53,8 @@
 -    npm install express to install express package. mediator and middleware. Middleware represents componentized pieces of functionality. 
 
 -Data Services:
--     using MongoDB to store data for the app
--     when you do node index.js or database.js, it should return a json string
--     
+- using MongoDB to store data for the app
+- when you do node index.js or database.js, it should return a json string
+- npm install mongodb to download mongodb
+- store credentials in dbConfig file
+- import dbConfig.json into the index.js or database.js file    
