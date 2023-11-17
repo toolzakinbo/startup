@@ -52,3 +52,7 @@
 -    Using middleware to add functionality
 -    npm install express to install express package. mediator and middleware. Middleware represents componentized pieces of functionality. 
 
+-Data Services:
+-     using MongoDB to store data for the app
+-     when you do node index.js or database.js, it should return a json string
+-     
