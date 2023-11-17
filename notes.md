@@ -59,3 +59,7 @@
 - store credentials in dbConfig file
 - import dbConfig.json into the index.js or database.js file
 - You can create different collections in your database     
+
+-Authorization Services:
+- authenticate a user by asking for information such as an email address and password.
+- 
