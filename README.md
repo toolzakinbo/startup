@@ -38,8 +38,8 @@ This deliverable is responsible for endpoints for retrieving recipe details, rat
 - API endpoints for authentication DONE
 - RESTFul API endpoints that serve as the interface between the front-end and backend of the app DONE
 #### Database
-This deliverable is responsible for storing the data for each recipe. 
-- MongoDB is the database used and it stores all the recipe data here.
+This deliverable is responsible for storing the data for each recipe. DONE
+- MongoDB is the database used and it stores all the recipe data here. DONE
 #### Login
 This deliverable associates recipes with a specific user
 - It is responsible for user registration. DONE
