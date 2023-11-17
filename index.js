@@ -1,72 +1,111 @@
 const express = require('express');
-const app = express();
+const { MongoClient } = require('mongodb');
+const config = require('./dbConfig.json');
 
+const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 app.use(express.json());
-
 app.use(express.static('public'));
 app.use(express.static('public/images'));
 
-let recipes = [
-  { id: 1, 
-    title: 'Spaghetti and Meatballs', 
-    description: 'Classic Italian pasta dish'
-    },
-  { id: 2, 
-    title: 'Pepperoni', 
-    description: 'Quick and easy pizza'
-    },
-];
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
-var apiRouter = express.Router();
-app.use(`/api`, apiRouter)
+const insertRecipe = async (recipe) => {
+  const client = new MongoClient(url);
 
-// Get Recipes
-apiRouter.get('/recipes', (req, res) => {
-  res.send(recipes);
+  try {
+    await client.connect();
+
+    const collection = client.db('recipes').collection('example');
+    await collection.insertOne(recipe);
+  } finally {
+    await client.close();
+  }
+};
+
+const getRecipesFromDB = async () => {
+  const client = new MongoClient(url);
+
+  try {
+    await client.connect();
+
+    const collection = client.db('recipes').collection('example');
+    const recipesFromDB = await collection.find().toArray();
+    return recipesFromDB;
+  } finally {
+    await client.close();
+  }
+};
+
+app.use(async (req, res, next) => {
+  try {
+    const recipesFromDB = await getRecipesFromDB();
+    res.locals.recipes = recipesFromDB; // Store recipes in locals for use in routes
+    next();
+  } catch (error) {
+    console.error('Error fetching recipes from the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-app.use((req, res) => {
-    res.sendFile('recreview.html', {root: 'public'})
-})
+// Get Recipes
+app.get('/api/recipes', (req, res) => {
+  res.json(res.locals.recipes);
+});
 
 // Create Recipe
-apiRouter.post('/recipes', (req, res) => {
+app.post('/api/recipes', async (req, res) => {
   const { title, description, image } = req.body;
   if (!title || !description || !image) {
-    return res.status(400).json({ error: 'Title, description and image are required' });
+    return res.status(400).json({ error: 'Title, description, and image are required' });
   }
-  const newRecipe = { id: recipes.length + 1, title, description };
-  recipes.push(newRecipe);
+
+  const newRecipe = { title, description, image };
+
+  await insertRecipe(newRecipe);
+
   res.status(201).json(newRecipe);
 });
 
 // Edit Recipe
-apiRouter.put('/recipes/:recipeId', (req, res) => {
-  const recipeId = parseInt(req.params.recipeId);
-  const recipe = recipes.find((r) => r.id === recipeId);
-  if (!recipe) {
-    return res.status(404).json({ error: 'Recipe not found' });
-  }
+app.put('/api/recipes/:recipeId', async (req, res) => {
+  const recipeId = req.params.recipeId;
+
   const { title, description } = req.body;
-  if (title) recipe.title = title;
-  if (description) recipe.description = description;
-  res.json(recipe);
+
+  const client = new MongoClient(url);
+  try {
+    await client.connect();
+    const collection = client.db('recipes').collection('example');
+    await collection.updateOne({ _id: recipeId }, { $set: { title, description } });
+  } finally {
+    await client.close();
+  }
+
+  res.json({ _id: recipeId, title, description });
 });
 
 // Delete Recipe
-apiRouter.delete('/recipes/:recipeId', (req, res) => {
-  const recipeId = parseInt(req.params.recipeId);
-  const index = recipes.findIndex((r) => r.id === recipeId);
-  if (index === -1) {
-    return res.status(404).json({ error: 'Recipe not found' });
+app.delete('/api/recipes/:recipeId', async (req, res) => {
+  const recipeId = req.params.recipeId;
+
+  const client = new MongoClient(url);
+  try {
+    await client.connect();
+    const collection = client.db('recipes').collection('example');
+    await collection.deleteOne({ _id: recipeId });
+  } finally {
+    await client.close();
   }
-  recipes.splice(index, 1);
+
   res.status(204).end();
 });
 
-// Start the Express server
+app.use((req, res) => {
+  res.sendFile('recreview.html', { root: 'public' });
+});
+
 app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-  });
+  console.log(`Listening on port ${port}`);
+});
