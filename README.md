@@ -43,7 +43,7 @@ This deliverable is responsible for storing the data for each recipe. DONE
 #### Login
 This deliverable associates recipes with a specific user
 - It is responsible for user registration. DONE
-- MongoDB is used to store the users and their recipes
+- MongoDB is used to store the users and their recipes DONE
 - Associate existing users with their recipes. DONE
 #### WebSocket 
 This deliverable is responsible for real-time updates on the frontend
