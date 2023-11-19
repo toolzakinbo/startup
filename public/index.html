@@ -7,12 +7,10 @@
     <title>Home</title>
     <link rel="stylesheet" href="index.css">
 
+
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-          <li><a href="recreview.html">Recipe Reviews</a></li>
-          <li><a href="recupload.html">Upload Recipe</a></li>
-          <li><a href="userprofile.html">User Profile</a></li>
       </ul>
   </nav>
 </head>
@@ -29,36 +27,30 @@
     
     <!-- Login Tab -->
     <div id="loginTab" class="tab-content">
-        <form action="login.php" method="post" onsubmit="return login()">
+        <form action="/api/login" method="post" onsubmit="return login()">
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required placeholder="joem"><br>
+            <input type="text" id="username" name="username" required><br>
 
             <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required placeholder="gjkgri6"><br>
+            <input type="password" id="password" name="password" required><br>
 
-            <button type="submit">Login</button>
+            <button type="button" onclick="login()">Login</button>
         </form>
     </div>
 
     <!-- Create Account Tab -->
     <div id="createAccountTab" class="tab-content" style="display:none;">
-        <form action="create-account.php" method="post">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" placeholder="Joe Malone" required><br>
-
-            <label for="name">Username:</label><br>
-            <input type="text" id="new-username" name="new-username" placeholder="joem" required><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" placeholder="joemalone@fake.com" required><br>
+        <form action="/api/create" method="post">
+            <label for="new-username">Username:</label><br>
+            <input type="text" id="new-username" name="new-username" required><br>
 
             <label for="new-password">Password:</label><br>
-            <input type="password" id="new-password" name="new-password" required placeholder="ssjkf34"><br>
+            <input type="password" id="new-password" name="new-password" required><br>
 
             <label for="confirm-password">Re-enter Password:</label><br>
-            <input type="password" id="confirm-password" name="confirm-password" required placeholder="ssjkf34"><br>
+            <input type="password" id="confirm-password" name="confirm-password" required><br>
 
-            <button type="submit">Create Account</button>
+            <button type="button" onclick="createAccount()">Create Account</button>
         </form>
     </div>
 
@@ -78,12 +70,54 @@
             document.getElementById(tabName).style.display = "block";
         }
 
-        function login() {
-            // Assuming the server-side login validation is successful, redirect to the recipe review page.
-            window.location.href = "recipe-review.html";
-            // Return false to prevent the form from submitting.
-            return false;
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Assuming the server-side login validation is successful, redirect to the recipe review page.
+                window.location.href = "recipe-review.html";
+            } else {
+                // Handle login error (display an error message, for example).
+                console.error('Login failed:', data.error);
+            }
         }
+
+        async function createAccount() {
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            const response = await fetch('/api/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: newUsername, password: newPassword }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Account creation successful, you may redirect or show a success message
+                window.location.href = "recipe-review.html";
+                console.log('Account created successfully:', data.message);
+            } else {
+                // Handle account creation error (display an error message, for example).
+                console.error('Account creation failed:', data.error);
+            }
+        }
+
     </script> 
     
     <!-- <script>
@@ -101,5 +135,6 @@
 <footer >
   <a href="https://github.com/toolzakinbo/startup/tree/main">GitHub</a>
 </footer>
+
 
 </html>
