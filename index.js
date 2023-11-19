@@ -1,19 +1,25 @@
-const express = require('express');
 const { MongoClient } = require('mongodb');
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+
 const config = require('./dbConfig.json');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static('public/images'));
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+const client = new MongoClient(url);
+const userCollection = client.db('recipes').collection('users');
 
 const insertRecipe = async (recipe) => {
   const client = new MongoClient(url);
-
   try {
     await client.connect();
 
@@ -41,21 +47,62 @@ const getRecipesFromDB = async () => {
 app.use(async (req, res, next) => {
   try {
     const recipesFromDB = await getRecipesFromDB();
-    res.locals.recipes = recipesFromDB; // Store recipes in locals for use in routes
+    res.locals.recipes = recipesFromDB; 
     next();
   } catch (error) {
     console.error('Error fetching recipes from the database:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+app.get('/api/user', async (req, res) => {
+  authToken = req.cookies['token'];
+  const user = await userCollection.findOne({token: authToken});
+  if(user){
+    res.send({username: user.username});
+    return;
+  }
+  res.status(401).send({msg: 'Unauthorized'});
+});
 
+app.post('/api/create', async (req, res) => {
+  if(await getUser(req.body.username)){
+    res.status(409).send({msg: "Username already exists"});
+  }else{
+    const user = await createUser(req.body.username, req.body.password);
+    setAuthCookie(res, user.token);
+    res.send({
+      id: user._id,
+    });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  const user = await getUser(req.body.username);
+  if(user){
+    if(await bcrypt.compare(req.body.password, user.password)){
+      setAuthCookie(res, user.token);
+      res.send({id: user._id});
+      return;
+    }
+  }
+  res.status(401).send({msg: 'Unauthorized'});
+})
+
+const requireAuth = (req, res, next) => {
+  const authToken = req.cookies['token'];
+  if(authToken){
+    next();
+  }else{
+    res.status(401).redirect('/public/index.html');
+  }
+}
 // Get Recipes
-app.get('/api/recipes', (req, res) => {
+app.get('/api/recipes', requireAuth, (req, res) => {
   res.json(res.locals.recipes);
 });
 
 // Create Recipe
-app.post('/api/recipes', async (req, res) => {
+app.post('/api/recipes', requireAuth, async (req, res) => {
   const { title, description, image } = req.body;
   if (!title || !description || !image) {
     return res.status(400).json({ error: 'Title, description, and image are required' });
@@ -69,7 +116,7 @@ app.post('/api/recipes', async (req, res) => {
 });
 
 // Edit Recipe
-app.put('/api/recipes/:recipeId', async (req, res) => {
+app.put('/api/recipes/:recipeId', requireAuth, async (req, res) => {
   const recipeId = req.params.recipeId;
 
   const { title, description } = req.body;
@@ -87,7 +134,7 @@ app.put('/api/recipes/:recipeId', async (req, res) => {
 });
 
 // Delete Recipe
-app.delete('/api/recipes/:recipeId', async (req, res) => {
+app.delete('/api/recipes/:recipeId', requireAuth, async (req, res) => {
   const recipeId = req.params.recipeId;
 
   const client = new MongoClient(url);
@@ -98,8 +145,39 @@ app.delete('/api/recipes/:recipeId', async (req, res) => {
   } finally {
     await client.close();
   }
-
   res.status(204).end();
+});
+
+function getUser(username) {
+  return userCollection.findOne({ username: username });
+}
+
+async function createUser(username, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = {
+    username: username,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  return user;
+}
+
+function setAuthCookie(res, authToken) {
+  res.cookie('token', authToken, {
+    secure: false,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+app.get('public/recupload.html', requireAuth, (req, res) => {
+  res.sendFile('recupload.html', { root: 'public' });
+});
+
+app.get('public/userprofile.html', requireAuth, (req, res) => {
+  res.sendFile('userprofile.html', { root: 'public' });
 });
 
 app.use((req, res) => {
@@ -109,3 +187,4 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
