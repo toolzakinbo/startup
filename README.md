@@ -45,6 +45,7 @@ This deliverable associates recipes with a specific user
 - It is responsible for user registration. DONE
 - MongoDB is used to store the users and their recipes DONE
 - Associate existing users with their recipes. DONE
+- STILL WORKING ON THE LOGOUT PART OF THIS BECAUSE WHEN I DID IT, IT KINDA BROKE THE CODE. ALSO WORKING ON GETTING ALL THE RECIPES LINKED WITH THE USERS.
 #### WebSocket 
 This deliverable is responsible for real-time updates on the frontend
 - Enables instant data exchange between the server and the client which allows users to see updates without refreshing the page.
