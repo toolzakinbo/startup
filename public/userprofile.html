@@ -21,26 +21,17 @@
 
     <h1>User Profile</h1>
 
+
     <section id="user-info">
         <h2>User Information</h2>
         <!-- Placeholder for database data showing user info-->
-        <p><strong>Name:</strong> Joe Malone</p>
-        <p><strong>Email:</strong> joemalone@fake.com</p>
+
     </section>
 
     <section id="liked-recipes">
         <h2>Liked Recipes</h2>
         <!-- Placeholder for database data showing liked recipes -->
-        <ul>
-            <li>
-                <h3>Stir Fry Noodles</h3>
-                <p>This delightful dish combines the bold and aromatic essence of Asian cuisine with the simplicity of a one-pan wonder. </p>
-            </li>
-            <li>
-                <h3>Vegan Pizza</h3>
-                <p>Embark on a culinary journey with our Ultimate Vegan Margherita Pizza, a plant-based delight that's as satisfying as it is delicious.</p>
-            </li>
-        </ul>
+        NO LIKED RECIPES YET
     </section>
 
     <section id="user-comments">
@@ -64,6 +55,33 @@
         <p id="websocket-data">Waiting for real-time data...</p>
     </section>
 
+
+    <script>
+        // Your JavaScript code to fetch and display user profile information
+        async function fetchUserProfile() {
+          const response = await fetch('/api/user');
+          if (!response.ok) {
+            throw new Error('Failed to fetch user profile');
+          }
+          const userProfile = await response.json();
+          return userProfile;
+        }
+    
+        async function displayUserProfile() {
+          const userInfoSection = document.getElementById("user-info");
+          try {
+            const userProfile = await fetchUserProfile();
+            userInfoSection.innerHTML = `<p>Welcome, ${userProfile.username}!</p>`;
+          } catch (error) {
+            userInfoSection.innerHTML = "Error fetching user profile";
+            console.error('Error fetching user profile:', error);
+          }
+        }
+    
+        document.addEventListener("DOMContentLoaded", () => {
+          displayUserProfile();
+        });
+      </script>
 </body>
 
 </html>
