@@ -20,9 +20,8 @@
     </nav>
 
     <main>
-        <section>
-            <h2>Welcome Sadie!</h2>
-            <p>Explore and share your favorite recipes with our community.</p>
+        <section id="welcomeSection">
+            
         </section>
 
         <div id="recipeList"></div>
@@ -39,7 +38,19 @@
     <script>
         // Call displayJoke when the page loads
         document.addEventListener("DOMContentLoaded", () => {
-          displayJoke();
+        const isLoggedIn = document.cookie.split(';').some((item) => item.trim().startsWith('sessionId='));
+        const welcomeSection = document.getElementById("welcomeSection");
+
+        if (isLoggedIn) {
+            // Replace with the actual username (you need to retrieve this from your server)
+            welcomeSection.innerHTML = `<h2>Welcome, ${username}!</h2>
+                                            <p>Explore and share your favorite recipes with our community.</p>`;
+        } else {
+            // If not logged in, show a generic message
+            welcomeSection.innerHTML = `<h2>Welcome!</h2>
+                                            <p>Explore and share your favorite recipes with our community.</p>`;
+        }
+        displayJoke();
         });
       </script>
       
@@ -50,3 +61,4 @@
 </body>
 
 </html>
+
