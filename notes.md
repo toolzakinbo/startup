@@ -69,10 +69,19 @@
 - Also create a login auth endpoint that would return a cookie containing the auth token and userID.
 - GetMe endpoint uses the auth token stored in the cookie to look up and return info about authenticated user.
 
--Websocket:
+- Websocket:
 - client/server model issue and the communication protocol websocket was created to solve this problem.
 - core feature of websocket is that it is fully duplexed
 - after the initial connection is made from a client, using vanilla HTTP, and then upgraded by the server to a websocket connection
 - the relationship changes to a peer-to-peer connection where either party can efficiently send data at any time.
 - websocket connections are only between two parties so if you want to facilitate a conversation between a group of users, the server must act as the intermediary.
 - you create a websocket object by specifying the port you want to communicate on
+
+- React:
+- react components allow you to modularize the functionality of your application
+- one of the primary purposes of a component is to generate the user interface. This is done with the component's render function.
+- allows you to pass information to them in the form of element properties
+- a component can have internal state. Component state is created by calling the react.useState hook function.
+- useState function returns a variable that contains the current state and a function to update the state.
+- It also supports class style components
+- properties are loaded on the constructor and state is set using a setState function on the component object
