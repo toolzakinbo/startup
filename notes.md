@@ -68,4 +68,11 @@
 - create an authentication endpoint to get the cookie containing the authentication token and user ID.
 - Also create a login auth endpoint that would return a cookie containing the auth token and userID.
 - GetMe endpoint uses the auth token stored in the cookie to look up and return info about authenticated user.
-  
+
+-Websocket:
+- client/server model issue and the communication protocol websocket was created to solve this problem.
+- core feature of websocket is that it is fully duplexed
+- after the initial connection is made from a client, using vanilla HTTP, and then upgraded by the server to a websocket connection
+- the relationship changes to a peer-to-peer connection where either party can efficiently send data at any time.
+- websocket connections are only between two parties so if you want to facilitate a conversation between a group of users, the server must act as the intermediary.
+- you create a websocket object by specifying the port you want to communicate on
