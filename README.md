@@ -44,11 +44,12 @@ This deliverable is responsible for storing the data for each recipe. DONE
 This deliverable associates recipes with a specific user
 - It is responsible for user registration. DONE
 - MongoDB is used to store the users and their recipes DONE
-- Associate existing users with their recipes. DONE
-- STILL WORKING ON THE LOGOUT PART OF THIS BECAUSE WHEN I DID IT, IT KINDA BROKE THE CODE. ALSO WORKING ON GETTING ALL THE RECIPES LINKED WITH THE USERS.
+- Associate existing users with their recipes. SEMI-DONE
+- STILL WORKING ON THE LOGOUT PART OF THIS BECAUSE WHEN I DID IT, IT KINDA BROKE THE CODE.
 #### WebSocket 
 This deliverable is responsible for real-time updates on the frontend
-- Enables instant data exchange between the server and the client which allows users to see updates without refreshing the page.
+- Enables instant data exchange between the server and the client which allows users to see updates without refreshing the page. THIS WORKS WHEN YOU UPLOAD A NEW RECIPE
+- WHEN YOU UPLOAD A PICTURE, IT SHOWS UP AS AN OBJECT ON MONGODB IF IT IS NOT ONE OF THE PICTURES I HAD IN MY IMAGES DIRECTORY
 #### React
 This deliverable is going to help with components for various parts of the app
 - homepage component
