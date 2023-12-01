@@ -16,6 +16,7 @@
             <li><a href="recreview.html">Recipe Reviews</a></li>
             <li><a href="recupload.html">Upload Recipe</a></li>
             <li><a href="userprofile.html">User Profile</a></li>
+            <li><button onclick="logout()">Logout</button></li>
         </ul>
     </nav>
 
@@ -25,13 +26,15 @@
         </section>
 
         <div id="recipeList"></div>
+        
+        <section>
+            <h2>Third Party Service</h2>
+            <div id = "jokeContainer"></div>
+        </section>
     
-        <div id = "jokeContainer"></div>
-    
-<!-- Placeholder for 3rd party service call-->
-        <section id="third-party-data">
-            <h2>Third-Party Service Data</h2>
-            <p id="third-party-content">Fetching data from the third-party service...</p>
+        <section id="real-time-updates">
+            <h3>Real-Time Updates</h3>
+            <div id="updateContainer"></div>
         </section>
     </main>
 
@@ -53,12 +56,32 @@
         displayJoke();
         });
       </script>
+
+      <script>
+        const socket = new WebSocket('ws://localhost:3000');
+        
+        socket.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+
+            if(data.type === 'newRecipe'){
+                const message = `New recipe added: ${data.data.title}`;
+                
+                const updateContainer = document.getElementById("updateContainer");
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                updateContainer.appendChild(messageElement);
+            }
+        })
+      </script>
       
     <footer>
         <a href="https://github.com/toolzakinbo/startup/tree/main">Github</a>
     </footer>
 
 </body>
+
+</html>
+
 
 </html>
 
