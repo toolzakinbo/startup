@@ -48,7 +48,7 @@ This deliverable associates recipes with a specific user
 - LOGOUT- DONE
 #### WebSocket 
 This deliverable is responsible for real-time updates on the frontend
-- Enables instant data exchange between the server and the client which allows users to see updates without refreshing the page. THIS WORKS WHEN YOU UPLOAD A NEW RECIPE
+- Enables instant data exchange between the server and the client which allows users to see updates without refreshing the page. THIS WORKS WHEN YOU UPLOAD A NEW RECIPE **DONE**
 - WHEN YOU UPLOAD A PICTURE, IT SHOWS UP AS AN OBJECT ON MONGODB IF IT IS NOT ONE OF THE PICTURES I HAD IN MY IMAGES DIRECTORY
 #### React
 This deliverable is going to help with components for various parts of the app
