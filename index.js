@@ -3,6 +3,8 @@ const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const WebSocket = require('ws');
+const http = require('http');
 
 const config = require('./dbConfig.json');
 
@@ -103,12 +105,18 @@ app.get('/api/recipes', requireAuth, (req, res) => {
 
 // Create Recipe
 app.post('/api/recipes', requireAuth, async (req, res) => {
-  const { title, description, image } = req.body;
-  if (!title || !description || !image) {
-    return res.status(400).json({ error: 'Title, description, and image are required' });
+  const { title, description, ingredients, instructions, image} = req.body;
+  if (!title || !description || !ingredients || !instructions || !image) {
+    return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const newRecipe = { title, description, image };
+  const newRecipe = { title, description, ingredients, instructions, image};
+
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ type: 'newRecipe', data: newRecipe }));
+    }
+  });
 
   await insertRecipe(newRecipe);
 
@@ -184,7 +192,25 @@ app.use((req, res) => {
   res.sendFile('recreview.html', { root: 'public' });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+
+wss.on('connection', (ws) => {
+  console.log('WebSocket connected');
+
+  ws.on('message', (message) => {
+    console.log(`Received: ${message}`);
+    wss.clients.forEach((client) => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+  ws.on('close', () => {
+    console.log('Websocket closed');
+    });
 });
 
+server.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
