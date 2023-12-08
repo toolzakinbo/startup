@@ -85,3 +85,8 @@
 - useState function returns a variable that contains the current state and a function to update the state.
 - It also supports class style components
 - properties are loaded on the constructor and state is set using a setState function on the component object
+- Toolchains would include code repo, linter (removes or warns of non-idiomatic code usage), transpiler (compiles code into a different format), polyfill (generates backward compatible code for supporting old browser versions that do not support the latest standards), bundler( packages code into bundles for delivery to the browser), minifier (removes whitespace and renames variables in order to make code smaller and efficient to deploy), testing and deployment
+- React Hooks:
+- They allow React function style components to be able to do everything that a class style component can do and more. Additionally, as new features are added to React they are including them as hooks. This makes function style components the preferred way of doing things in React.
+- useEffect hook allows you to represent lifecylce events.
+- You can control what triggers a useEffect hook by specifying its dependencies. In the following example, we have two state variables, but we only want the useEffect hook to be called when the component is initially called and when the first variable is clicked. 
