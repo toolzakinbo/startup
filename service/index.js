@@ -57,7 +57,7 @@ app.use(async (req, res, next) => {
   }
 });
 app.get('/api/user', async (req, res) => {
-  authToken = req.cookies['token'];
+  let authToken = req.cookies['token'];
   const user = await userCollection.findOne({token: authToken});
   if(user){
     res.send({username: user.username});
@@ -95,7 +95,7 @@ const requireAuth = (req, res, next) => {
   if(authToken){
     next();
   }else{
-    res.status(401).redirect('/public/index.html');
+    res.status(401).redirect('/src/index.html');
   }
 }
 // Get Recipes
